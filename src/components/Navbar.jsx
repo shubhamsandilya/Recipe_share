@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaPlus, FaCoins, FaBars, FaTimes } from "react-icons/fa";
+import { auth, provider } from "../config/index";
+import { signInWithPopup } from "firebase/auth";
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -7,6 +9,18 @@ function Navbar() {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const [value, setValue] = useState("");
+  const handleClick = () => {
+    console.log("first");
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem("email", data.user.email);
+    });
+  };
+
+  useEffect(() => {
+    setValue(localStorage.getItem("email"));
+  });
 
   return (
     <div>
@@ -26,7 +40,7 @@ function Navbar() {
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-              <span className="ml-3 text-xl">Tailblocks</span>
+              <span className="ml-3 text-xl">FlavorFusion</span>
             </a>
             <div className="md:hidden">
               <button
@@ -46,13 +60,16 @@ function Navbar() {
               isMobileMenuOpen ? "flex" : "hidden"
             } flex-col md:flex md:flex-row md:ml-auto md:mr-auto w-full md:w-auto mt-4 md:mt-0`}
           >
-            <a className="mr-5 hover:text-white">First Link</a>
-            <a className="mr-5 hover:text-white">Second Link</a>
-            <a className="mr-5 hover:text-white">Third Link</a>
-            <a className="mr-5 hover:text-white">Fourth Link</a>
+            <a className="mr-5 hover:text-white">Home</a>
+            <a className="mr-5 hover:text-white">Recipes</a>
+            <a className="mr-5 hover:text-white">Add Recipe</a>
+            {/* <a className="mr-5 hover:text-white">Fourth Link</a> */}
           </nav>
           <div className="flex items-center space-x-4 mt-4 md:mt-0 md:ml-auto">
-            <button className="inline-flex items-center py-1 px-3 focus:outline-none hover:text-white rounded text-base md:bg-gray-800 md:hover:bg-gray-700">
+            <button
+              onClick={handleClick}
+              className="inline-flex items-center py-1 px-3 focus:outline-none hover:text-white rounded text-base md:bg-gray-800 md:hover:bg-gray-700"
+            >
               Login
               <svg
                 fill="none"
