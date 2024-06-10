@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import validator from "validator";
+const mongoose = require("mongoose");
+const validator = require("validator");
 
 //schema
 const userSchema = new mongoose.Schema(
@@ -17,6 +17,9 @@ const userSchema = new mongoose.Schema(
     profileUrl: {
       type: String,
     },
+    token: {
+      type: String,
+    },
     coin: {
       type: Number,
       default: 50,
@@ -27,4 +30,4 @@ const userSchema = new mongoose.Schema(
 
 const Users = mongoose.model("Users", userSchema);
 
-export default Users;
+module.exports = Users;

@@ -11,8 +11,8 @@ function Hero() {
 
   return (
     <div className="">
-      <section className="text-gray-400 bg-gray-900 body-font">
-        <div className="container h-screen mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <section className="text-gray-400  bg-gray-900 body-font">
+        <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
               A Culinary Journey Awaits
@@ -36,7 +36,7 @@ function Hero() {
               </button>
             </div>
           </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-full">
+          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-full mt-8 md:mt-0">
             <Carousel autoSlide={true} className="h-80">
               {slides.map((s, index) => (
                 <img

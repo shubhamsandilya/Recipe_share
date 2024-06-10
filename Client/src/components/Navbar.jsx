@@ -3,11 +3,13 @@ import { FaPlus, FaCoins, FaBars, FaTimes } from "react-icons/fa";
 import { auth, provider } from "../config/index";
 import { signInWithPopup } from "firebase/auth";
 import { useDispatch } from "react-redux";
+import { apiRequest } from "../utils";
 import { Login, Logout } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 // import logo from "../assets/logo.png";
 function Navbar() {
   const { user } = useSelector((state) => state.user);
+  console.log("=====", user);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,17 +24,32 @@ function Navbar() {
   const handleClick = () => {
     console.log("first");
     signInWithPopup(auth, provider).then((data) => {
-      console.log(data);
       const userInfo = {
         email: data.user.email,
         name: data.user.displayName,
         profileUrl: data.user.photoURL,
-        token: data.user.token,
+        token: data.user.accessToken,
       };
+      console.log(data);
 
       dispatch(Login(userInfo));
       localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      createUser(userInfo);
     });
+  };
+  const createUser = async (data) => {
+    console.log(user);
+    try {
+      const response = await apiRequest({
+        url: "/users",
+        token: data?.token,
+        data: data,
+        method: "POST",
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   const handleLogout = () => {
     dispatch(Logout());
