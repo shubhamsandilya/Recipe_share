@@ -37,7 +37,7 @@ function Hero() {
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-full">
-            <Carousel autoSlide={true} className="h-96">
+            <Carousel autoSlide={true} className="h-80">
               {slides.map((s, index) => (
                 <img
                   key={index}

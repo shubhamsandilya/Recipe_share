@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
+import { useDispatch } from "react-redux";
+import { Login } from "../redux/userSlice";
 const firebaseConfig = {
   apiKey: "AIzaSyCC9j4o7EEprYzqg965lWrwK3yQy25j14s",
   authDomain: "recipe-app-ff759.firebaseapp.com",
@@ -14,7 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+
 export { auth, provider };

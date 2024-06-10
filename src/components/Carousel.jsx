@@ -21,7 +21,7 @@ const Carousel = ({
   }, [autoSlide, autoSlideInterval]);
 
   return (
-    <div className="overflow-hidden relative h-[600px]">
+    <div className="overflow-hidden relative h-[500px]">
       {" "}
       {/* Adjust height here */}
       <div
