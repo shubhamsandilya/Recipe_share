@@ -1,6 +1,6 @@
-🍽️ RecipeFusion
+🍽️ FlavorFusion
 
-Welcome to RecipeShare! Your go-to platform for discovering, sharing, and enjoying delicious recipes from around the world. Whether you're a seasoned chef or a home-cooking enthusiast, RecipeShare is here to inspire your culinary adventures.
+Welcome to FlavorFusion! Your go-to platform for discovering, sharing, and enjoying delicious recipes from around the world. Whether you're a seasoned chef or a home-cooking enthusiast, RecipeShare is here to inspire your culinary adventures.
 
 🚀 Features
 📚 Explore Recipes: Discover a wide variety of recipes curated by our community.
@@ -46,7 +46,7 @@ For detailed information, please check our CONTRIBUTING.md.
 
 
 ⭐ Acknowledgments
-A big thank you to task team who made RecipeFusion possible! 🙏
+A big thank you to task team who made FlavorFusion possible! 🙏
 
 Enjoy cooking and sharing! 🥳🍲
 
