@@ -77,6 +77,9 @@ function Navbar() {
   const handleBuy = async () => {
     window.location.replace("/buy-coin");
   };
+  const handleRecipe = async () => {
+    window.location.replace("/products");
+  };
 
   useEffect(() => {
     getCoin();
@@ -122,7 +125,11 @@ function Navbar() {
             <a href="/" className="mr-5 hover:text-white">
               Home
             </a>
-            <a href="#" className="mr-5 hover:text-white">
+            <a
+              onClick={handleRecipe}
+              href="#"
+              className="mr-5 hover:text-white"
+            >
               Recipes
             </a>
             <a

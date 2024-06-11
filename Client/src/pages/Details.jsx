@@ -14,7 +14,7 @@ function Details() {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:3030/api/v1/recipe/getbyid/?id=${id}`
+          `https://recipe-share-pdlg.onrender.com/api/v1/recipe/getbyid/?id=${id}`
         );
         console.log(response);
         setRecipe(response.data);

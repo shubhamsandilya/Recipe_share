@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:3030/api/v1";
+const API_URL = "https://recipe-share-pdlg.onrender.com/api/v1";
 
 export const API = axios.create({
   baseURL: API_URL,

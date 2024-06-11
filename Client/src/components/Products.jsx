@@ -7,8 +7,6 @@ import Loader from "./Loader";
 
 function Products() {
   const { user } = useSelector((state) => state.user);
-  console.log(user);
-  const [userCoin, setCoin] = useState();
 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,7 +63,7 @@ function Products() {
           return;
         }
         const email = await axios.get(
-          `http://localhost:3030/api/v1/recipe/email?id=${e.target.value}`
+          `https://recipe-share-pdlg.onrender.com/api/v1/recipe/email?id=${e.target.value}`
         );
         if (email.data.data.creatorEmail === user.email) {
           window.location.replace("/details/" + e.target.value);
