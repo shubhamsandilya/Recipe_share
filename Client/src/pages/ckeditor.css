@@ -1,0 +1,9 @@
+:root {
+  --ck-color-text: white;
+  --ck-color-base-background: #212529;
+}
+
+.ck-editor__editable {
+  color: var(--ck-color-text);
+  background-color: var(--ck-color-base-background);
+}

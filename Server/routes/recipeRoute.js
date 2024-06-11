@@ -1,8 +1,8 @@
-import express from "express";
-// import { getUser, updateUser } from "../controllers/userController.js";
-// import userAuth from "../middleware/auth.js";
-const route = express.Router();
-// route.get("/get-user", userAuth, getUser);
-// route.put("/update-user", userAuth, updateUser);
+const express = require("express");
+const { createRecipe } = require("../controller/recipeController");
+const authenticate = require("../middleware/auth");
 
-export default route;
+const route = express.Router();
+route.post("/", authenticate, createRecipe);
+
+module.exports = route;

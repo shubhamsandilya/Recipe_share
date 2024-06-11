@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "./Carousel";
 import img1 from "../assets/1.jpg";
 import img2 from "../assets/2.jpg";
 import img3 from "../assets/3.jpg";
 import img4 from "../assets/4.jpg";
 import img5 from "../assets/5.jpg";
+import { useSelector } from "react-redux";
+import Swal from "react-sweetalert2";
 
 function Hero() {
   const slides = [img1, img2, img3, img4, img5];
+  const [swalProps, setSwalProps] = useState({});
+  const { user } = useSelector((state) => state.user);
+  const [swalShown, setSwalShown] = useState(false);
+
+  const showSwal = () => {
+    if (!user.email) {
+      alert("Login to continue");
+    } else {
+      window.location.replace("/form");
+    }
+  };
 
   return (
     <div className="">
@@ -31,7 +44,11 @@ function Hero() {
               <button className="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
                 See recipes
               </button>
-              <button className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">
+
+              <button
+                onClick={showSwal}
+                className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
+              >
                 Add recipe
               </button>
             </div>

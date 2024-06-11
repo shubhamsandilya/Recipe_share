@@ -8,6 +8,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, " Name is Required!"],
     },
+    userId: {
+      type: String,
+    },
     email: {
       type: String,
       required: [true, " Email is Required!"],
