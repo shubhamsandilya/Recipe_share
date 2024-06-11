@@ -63,7 +63,7 @@ function AddForm() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-300">
       <h1 className="text-3xl font-bold text-gray-900 mb-4">Add Recipe</h1>
 
-      <div className="max-w-2xl mx-auto p-4 bg-gray-900 text-white rounded-lg shadow-lg">
+      <div className="max-w-2xl mx-auto p-4 bg-gray-900 text-white rounded-lg shadow-lg mb-5">
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <label htmlFor="title" className="block text-lg font-medium mb-1">

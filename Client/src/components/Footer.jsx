@@ -23,7 +23,7 @@ function Footer() {
           <p class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">
             © 2024 FlavorFusion —
             <a
-              href="https://twitter.com/knyttneve"
+              href="https://www.linkedin.com/in/shubham-sandilya-071ba4210/"
               class="text-gray-500 ml-1"
               target="_blank"
               rel="noopener noreferrer"

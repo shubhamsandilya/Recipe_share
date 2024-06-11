@@ -9,9 +9,8 @@ import { useSelector } from "react-redux";
 // import logo from "../assets/logo.png";
 function Navbar() {
   const { user } = useSelector((state) => state.user);
-  console.log("=====", user);
+  const [userCoin, setCoin] = useState();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -55,8 +54,33 @@ function Navbar() {
     dispatch(Logout());
     window.location.replace("/");
   };
-  console.log(user);
 
+  const showSwal = () => {
+    if (!user.email) {
+      alert("Login to continue");
+    } else {
+      window.location.replace("/form");
+    }
+  };
+  const getCoin = async () => {
+    try {
+      const response = await apiRequest({
+        url: "/users/coin",
+        token: user?.token,
+        method: "GET",
+      });
+      setCoin(response.data[0].coin);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const handleBuy = async () => {
+    window.location.replace("/buy-coin");
+  };
+
+  useEffect(() => {
+    getCoin();
+  }, []);
   return (
     <div>
       <header className="text-gray-400 bg-gray-900 body-font">
@@ -95,13 +119,16 @@ function Navbar() {
               isMobileMenuOpen ? "flex" : "hidden"
             } flex-col md:flex md:flex-row md:ml-auto md:mr-auto w-full md:w-auto mt-4 md:mt-0`}
           >
-            <a href="#" className="mr-5 hover:text-white">
+            <a href="/" className="mr-5 hover:text-white">
               Home
             </a>
             <a href="#" className="mr-5 hover:text-white">
               Recipes
             </a>
-            <a href="#" className="mr-5 hover:text-white">
+            <a
+              onClick={showSwal}
+              className="mr-5 hover:text-white cursor-pointer"
+            >
               Add Recipe
             </a>
           </nav>
@@ -125,10 +152,13 @@ function Navbar() {
                 </svg>
               </button>
             )}
-            <button className="flex items-center bg-red-500 text-white px-2 py-1 rounded-full hover:bg-red-600">
+            <button
+              onClick={handleBuy}
+              className="flex items-center bg-red-500 text-white px-2 py-1 rounded-full hover:bg-red-600"
+            >
               <FaPlus className="mr-1" />
               <FaCoins className="mr-2" />
-              <span className="text-lg font-semibold">123</span>
+              <span className="text-lg font-semibold">{userCoin || 0}</span>
             </button>
             {user.email && (
               <div className="relative">

@@ -20,8 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: "15mb" }));
 
-// app.use("api/v1/auth", authRoute);
-
 app.use(router);
 app.use(errorMiddleware);
 app.listen(port, () => {

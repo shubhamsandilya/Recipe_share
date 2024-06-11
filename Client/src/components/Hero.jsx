@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { auth, provider } from "../config/index";
+import { signInWithPopup } from "firebase/auth";
 import Carousel from "./Carousel";
 import img1 from "../assets/1.jpg";
 import img2 from "../assets/2.jpg";
@@ -6,6 +8,8 @@ import img3 from "../assets/3.jpg";
 import img4 from "../assets/4.jpg";
 import img5 from "../assets/5.jpg";
 import { useSelector } from "react-redux";
+import { Login, Logout } from "../redux/userSlice";
+import { useDispatch } from "react-redux";
 import Swal from "react-sweetalert2";
 
 function Hero() {
@@ -13,13 +17,32 @@ function Hero() {
   const [swalProps, setSwalProps] = useState({});
   const { user } = useSelector((state) => state.user);
   const [swalShown, setSwalShown] = useState(false);
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    console.log("first");
+    signInWithPopup(auth, provider).then((data) => {
+      const userInfo = {
+        email: data.user.email,
+        name: data.user.displayName,
+        profileUrl: data.user.photoURL,
+        token: data.user.accessToken,
+      };
+      console.log(data);
 
+      dispatch(Login(userInfo));
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+    });
+  };
   const showSwal = () => {
     if (!user.email) {
       alert("Login to continue");
+      handleClick();
     } else {
       window.location.replace("/form");
     }
+  };
+  const handleRecipe = () => {
+    window.location.replace("/products");
   };
 
   return (
@@ -41,7 +64,10 @@ function Hero() {
               savored.
             </p>
             <div className="flex justify-center">
-              <button className="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
+              <button
+                onClick={handleRecipe}
+                className="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
+              >
                 See recipes
               </button>
 
