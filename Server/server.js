@@ -8,12 +8,11 @@ const dbConnection = require("./config/dbConnection.js");
 const router = require("./routes/index.js");
 const errorMiddleware = require("./middleware/error.js");
 
+dbConnection();
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
-dbConnection();
 
 app.use(cors());
 app.use(bodyParser.json());
