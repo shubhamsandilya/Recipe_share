@@ -4,16 +4,107 @@ import { apiRequest } from "../utils";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Loader from "./Loader";
+import styled from "styled-components";
 
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+const GalleryStyles = styled.div`
+  .gallery__grid {
+    display: grid;
+    gap: 2rem;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    justify-content: center;
+  }
+  .gallery__title {
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .item {
+    min-width: 200px;
+    width: 260px;
+    margin: auto;
+    border: 3px solid var(--gray-1);
+    padding: 1rem;
+  }
+  .item__btns {
+    display: flex;
+    justify-content: space-between;
+    button {
+      font-size: 1.125rem;
+      background-color: var(--gray-1);
+      padding: 0.2rem 0.5rem;
+      height: 3rem;
+      border-radius: 8px;
+      font-weight: bolder;
+    }
+  }
+  .item-img {
+    width: 140px;
+    height: 140px;
+    margin: auto;
+    margin-bottom: 1rem;
+    img {
+      object-fit: contain;
+    }
+  }
+  .item-title {
+    font-size: 1rem;
+    height: 82px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .item-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .item-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    width: 60px;
+  }
+  .item__btnadd {
+    border: 2px solid var(--red-1);
+    color: var(--red-1);
+  }
+  .item-price {
+    font-size: 2.5rem;
+    color: var(--blue-1);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .item__btnbuy {
+    border: 2px solid var(--red-1);
+    background-color: var(--red-1) !important;
+    color: var(--gray-1);
+  }
+  .item-start {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid yellow;
+    svg {
+      font-size: 1rem;
+    }
+  }
+  .skeleton {
+    margin-bottom: 1rem;
+  }
+`;
 function Products() {
   const { user } = useSelector((state) => state.user);
 
-  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
   const [title, setTitle] = useState("");
-
+  const rowSkeletons = 8;
   useEffect(() => {
     fetchRecipes();
   }, []);
@@ -43,6 +134,38 @@ function Products() {
       console.error("Error fetching recipes:", error);
     }
   };
+  if (loading) {
+    let rows = [];
+    for (let index = 0; index < rowSkeletons; index++) {
+      rows.push(
+        <section>
+          <article className="item">
+            <div className="item-img">
+              <Skeleton width={140} height={140} />
+            </div>
+            <h3 className="item-title">
+              <Skeleton count={4} />
+            </h3>
+            <div className="item-info">
+              <Skeleton width={160} height={20} />
+              <Skeleton width={22} height={22} circle={true} />
+            </div>
+          </article>
+        </section>
+      );
+    }
+
+    return (
+      <SkeletonTheme className="" highlightColor="#ffffff">
+        <GalleryStyles className="gallery__grid bg-gray-900">
+          <h2 className="gallery__title">
+            <Skeleton />
+          </h2>
+          <div className="gallery__grid">{rows}</div>
+        </GalleryStyles>
+      </SkeletonTheme>
+    );
+  }
 
   const handleSearch = () => {
     fetchRecipes();
@@ -88,7 +211,9 @@ function Products() {
     }
   };
   console.log(images);
-
+  const handleFav = () => {
+    alert("Favourite added");
+  };
   return (
     <div>
       <section className="text-gray-400 bg-gray-900 body-font">
