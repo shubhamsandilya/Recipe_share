@@ -1,5 +1,7 @@
 // import mongoose, { Mongoose } from "mongoose";
 const Recipes = require("../model/recipe.model");
+const passport = require("passport");
+const TwitterStrategy = require("passport-twitter").Strategy;
 
 const createRecipe = async (req, res, next) => {
   console.log(req);
@@ -91,5 +93,88 @@ const getById = async (req, res, next) => {
     res.status(404).json({ message: error.message });
   }
 };
+// const validateTwitter = async (req, res, next) => {
+//   const TWITTER_CONSUMER_KEY = "lMwnjm3jD2nUqbX5Esh8pKphA";
+//   const TWITTER_CONSUMER_SECRET =
+//     "aDoP0EQiAcOesSMYx36IWuBv48FjBMAuRTFiilMyPR50PhMH6p";
+//   passport.use(
+//     new TwitterStrategy(
+//       {
+//         consumerKey: TWITTER_CONSUMER_KEY,
+//         consumerSecret: TWITTER_CONSUMER_SECRET,
+//         callbackURL: "https://www.youtube.com/watch?v=btWBQ1YhkDQ",
+//       },
+//       function (token, tokenSecret, profile, done) {
+//         console.log(profile);
+//         return done(null, profile);
+//       }
+//     )
+//   );
+//   passport.serializeUser((user, done) => {
+//     done(null, user);
+//   });
 
-module.exports = { createRecipe, getRecipe, getEmail, getById };
+//   passport.deserializeUser((obj, done) => {
+//     done(null, obj);
+//   });
+
+//   exports.initializePassport = (app) => {
+//     app.use(passport.initialize());
+//   };
+
+//   exports.twitterAuth = passport.authenticate("twitter");
+
+//   exports.twitterAuthCallback = passport.authenticate("twitter", {
+//     failureRedirect: "/",
+//   });
+
+//   exports.profile = (req, res) => {
+//     res.send(req.user); // User profile information
+//   };
+// };
+const TWITTER_CONSUMER_KEY = "lMwnjm3jD2nUqbX5Esh8pKphA";
+const TWITTER_CONSUMER_SECRET =
+  "aDoP0EQiAcOesSMYx36IWuBv48FjBMAuRTFiilMyPR50PhMH6p";
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: TWITTER_CONSUMER_KEY,
+      consumerSecret: TWITTER_CONSUMER_SECRET,
+      callbackURL: "https://www.youtube.com/watch?v=btWBQ1YhkDQ",
+    },
+    function (token, tokenSecret, profile, done) {
+      console.log(profile);
+      return done(null, profile);
+    }
+  )
+);
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
+exports.initializePassport = (app) => {
+  app.use(passport.initialize());
+};
+
+twitterAuth = passport.authenticate("twitter");
+
+exports.twitterAuthCallback = passport.authenticate("twitter", {
+  failureRedirect: "/",
+});
+
+exports.profile = (req, res) => {
+  res.send(req.user); // User profile information
+};
+
+module.exports = {
+  createRecipe,
+  getRecipe,
+  getEmail,
+  getById,
+  // validateTwitter,
+  twitterAuth,
+};

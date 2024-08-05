@@ -18,7 +18,6 @@ function Footer() {
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span class="ml-3 text-xl">FlavorFusion</span>
           </a>
           <p class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">
             © 2024 FlavorFusion —
@@ -44,7 +43,7 @@ function Footer() {
                 <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
               </svg>
             </a>
-            <a class="ml-3 text-gray-400">
+            <a class="ml-3 cursor-pointer text-gray-400">
               <svg
                 fill="currentColor"
                 stroke-linecap="round"

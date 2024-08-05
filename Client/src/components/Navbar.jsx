@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { apiRequest } from "../utils";
 import { Login, Logout } from "../redux/userSlice";
 import { useSelector } from "react-redux";
+import { LoginButton } from "@telegram-auth/react";
 // import logo from "../assets/logo.png";
 function Navbar() {
   const { user } = useSelector((state) => state.user);
@@ -159,6 +160,14 @@ function Navbar() {
                 </svg>
               </button>
             )}
+            <LoginButton
+              botUsername="Skilleareumbot"
+              authCallbackUrl="https://chatgpt.com/c/62febd7c-f174-4827-a2e1-a1d762c3a412"
+              buttonSize="large" // "large" | "medium" | "small"
+              cornerRadius={5} // 0 - 20
+              showAvatar={true} // true | false
+              lang="en"
+            />
             <button
               onClick={handleBuy}
               className="flex items-center bg-red-500 text-white px-2 py-1 rounded-full hover:bg-red-600"
